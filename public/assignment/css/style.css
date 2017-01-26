@@ -5,3 +5,21 @@ input.form-control {
 body {
     padding-top: 36px;
 }
+
+.blue-navbar {
+    background-color: #2655ff;
+}
+
+.white-color {
+    color: white;
+}
+
+a:hover {
+    text-decoration: none;
+}
+
+.top-margin {
+    margin-top: 20px;
+    margin-left: 20px;
+    margin-right: 20px;
+}

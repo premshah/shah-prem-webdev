@@ -5,30 +5,35 @@
     <title>Title</title>
     <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet"/>
     <link href="css/style.css" rel="stylesheet"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 </head>
 <body>
 
-<nav class="navbar navbar-default navbar-fixed-top">
+<nav class="navbar navbar-primary navbar-fixed-top blue-navbar">
     <div class="container-fluid">
-        <div class="navbar-header">
-            <a class="navbar-brand" href="#">
-                Fixed Top
-            </a>
-            <p class="navbar-text pull-right">
-                <a href="#" class="navbar-link">
-          <span class="glyphicon glyphicon-plus">
-          </span>
-                </a>
-            </p>
+        <div class="navbar-header btn-block">
+            <div class="row">
+                <div class="col-sm-12">
+                    <a class="navbar-brand white-color pull-left" href="#">
+                        Profile
+                    </a>
+                    <p class="navbar-text pull-right">
+                        <a href="#" class="navbar-link">
+                            <span class="glyphicon glyphicon-ok white-color">
+                            </span>
+                        </a>
+                    </p>
+                </div>
+            </div>
         </div>
     </div>
 </nav>
 
 
     <div class="container">
-        <h1>Profile</h1>
+        <!--<h1>Profile</h1>-->
 
-        <form>
+        <form class="top-margin">
             <div class="form-group">
                 <label for="username">Username</label>
                 <input type="text" class="form-control" id="username" placeholder="Username">
@@ -53,7 +58,7 @@
            href="login.html">Logout</a>
     </div>
 
-<nav class="navbar navbar-default navbar-fixed-bottom">
+<!--<nav class="navbar navbar-default navbar-fixed-bottom">
     <div class="container">
         <div class="row navbar-text">
             <div class="col-xs-3 text-center">
@@ -78,7 +83,17 @@
             </div>
         </div>
     </div>
+</nav>-->
+<nav class="navbar navbar-primary navbar-fixed-bottom blue-navbar">
+    <div class="container">
+        <div class="row navbar-right">
+            <div class="col-xs-12 pull-right">
+                <a href="#">
+                    <span class="glyphicon glyphicon-user white-color"></span>
+                </a>
+            </div>
+        </div>
+    </div>
 </nav>
-
 </body>
 </html>

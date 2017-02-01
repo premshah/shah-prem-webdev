@@ -2,9 +2,9 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Widget Image</title>
+    <title>Widget Heading</title>
     <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet"/>
-    <link href="css/style.css" rel="stylesheet"/>
+    <link href="../css/style.css" rel="stylesheet"/>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 </head>
 <body>
@@ -15,8 +15,8 @@
                 <div class="row">
                     <div class="col-xs-12">
                         <p class="navbar-text pull-left">
-                            <a href="#" class="navbar-link">
-                                        <span class="glyphicon glyphicon-chevron-left">
+                            <a href="widget-list.html" class="navbar-link">
+                                        <span class="glyphicon glyphicon-chevron-left white-color">
                                         </span>
                             </a>
                         </p>
@@ -24,8 +24,8 @@
                             Widget Edit
                         </a>
                         <p class="navbar-text pull-right">
-                            <a href="#" class="navbar-link">
-                                        <span class="glyphicon glyphicon-ok">
+                            <a href="widget-list.html" class="navbar-link">
+                                        <span class="glyphicon glyphicon-ok white-color">
                                         </span>
                             </a>
                         </p>
@@ -36,6 +36,7 @@
         </div>
     </nav>
 
+    <div class="container">
     <form class="top-margin">
         <div class="form-group">
             <label>Name</label>
@@ -48,33 +49,27 @@
         </div>
 
         <div class="form-group">
-            <label>URL</label>
+            <label>Size</label>
             <input class="form-control"/>
         </div>
 
-        <div class="form-group">
-            <label>Width</label>
-            <input class="form-control"/>
-        </div>
-
-        <div class="form-group">
-            <label>Upload</label>
-            <input type="file" class="form-control"/>
-        </div>
-
-        <button class="btn btn-primary btn-block">Upload Image</button>
-        <button class="btn btn-danger btn-block">Delete</button>
+        <a href="widget-list.html" class="btn btn-danger btn-block">Delete</a>
     </form>
+    </div>
 
     <nav class="navbar navbar-default navbar-fixed-bottom">
-        <div class="btn-block">
-            <div class="row navbar-right">
-                <div class="col-sm-12 pull-right">
-                    <a href="#">
-                        <span class="glyphicon glyphicon-user"></span>
+        <div class="container-fluid">
+        <div class="navbar-footer btn-block">
+            <div class="row">
+                <div class="col-sm-12">
+                    <p class="pull-right">
+                    <a href="/assignment/user/profile.html">
+                        <span class="glyphicon glyphicon-user white-color"></span>
                     </a>
+                    </p>
                 </div>
             </div>
+        </div>
         </div>
     </nav>
 </body>

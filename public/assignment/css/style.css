@@ -2,24 +2,39 @@ input.form-control {
     margin-bottom: 5px;
 }
 
-body {
-    padding-top: 36px;
-}
-
-.blue-navbar {
-    background-color: #2655ff;
-}
-
 .white-color {
     color: white;
+}
+
+.navbar-fixed-top {
+    background-color: black;
+}
+
+.navbar-fixed-bottom {
+    background-color: black;
 }
 
 a:hover {
     text-decoration: none;
 }
 
+.navbar-footer {
+    margin-right: -15px;
+    margin-left: -15px;
+}
+
+body{
+    overflow-x: hidden;
+}
+
 .top-margin {
-    margin-top: 20px;
-    margin-left: 20px;
-    margin-right: 20px;
+    margin-top: 75px;
+    }
+
+.pms-toolbar {
+    position: absolute;
+    background-color: silver;
+    right: 15px;
+    padding-left: 10px;
+    padding-bottom: 10px;
 }

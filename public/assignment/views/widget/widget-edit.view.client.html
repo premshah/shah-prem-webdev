@@ -1,0 +1,37 @@
+<nav class="navbar navbar-default navbar-fixed-top">
+    <div class="container-fluid">
+        <div class="navbar-text pull-left">
+            <a ng-click="model.goback()">
+                <span class="glyphicon glyphicon-chevron-left white-color"></span>
+            </a>
+        </div>
+        <div class="navbar-text pull-right">
+            <a ng-click="model.updatewidget()">
+                <span class="glyphicon glyphicon-ok white-color"></span>
+            </a>
+        </div>
+        <div class="navbar-header">
+            <a class="navbar-brand" href="#">Widget Editor</a>
+        </div>
+    </div>
+</nav>
+
+<div class="container-fluid">
+    <ng-include src="model.getEditorTemplateUrl(model.widget.widgetType)"></ng-include>
+</div>
+
+<nav class="navbar navbar-default navbar-fixed-bottom">
+    <div class="container-fluid">
+        <div class="navbar-footer btn-block">
+            <div class="row">
+                <div class="col-sm-12">
+                    <p class="pull-right">
+                        <a ng-click="model.profile()">
+                            <span class="glyphicon glyphicon-user white-color"></span>
+                        </a>
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+</nav>

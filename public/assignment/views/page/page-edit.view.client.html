@@ -1,13 +1,4 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>New Page</title>
-    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet"/>
-    <link href="../css/style.css" rel="stylesheet"/>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-</head>
-<body>
+
     <nav class="navbar navbar-default navbar-fixed-top">
         <div class="container-fluid">
 
@@ -15,18 +6,18 @@
                 <div class="row">
                     <div class="col-xs-12">
                         <p class="navbar-text pull-left">
-                            <a href="page-list.html" class="navbar-link">
-                                    <span class="glyphicon glyphicon-chevron-left white-color">
-                                    </span>
+                            <a ng-click="model.goback()" class="navbar-link">
+                                        <span class="glyphicon glyphicon-chevron-left white-color">
+                                        </span>
                             </a>
                         </p>
                         <a class="navbar-brand" href="#">
-                            New Page
+                            Page Edit
                         </a>
                         <p class="navbar-text pull-right">
-                            <a href="page-list.html" class="navbar-link">
-                                    <span class="glyphicon glyphicon-ok white-color">
-                                    </span>
+                            <a ng-click="model.updatepage()" class="navbar-link">
+                                        <span class="glyphicon glyphicon-ok white-color">
+                                        </span>
                             </a>
                         </p>
                     </div>
@@ -40,13 +31,15 @@
     <form class="top-margin">
         <div class="form-group">
             <label>Name</label>
-            <input class="form-control" placeholder="Page Name"/>
+            <input ng-model="model.page.name" class="form-control" placeholder="Page Name"/>
         </div>
 
         <div class="form-group">
-            <label>Title</label>
-            <input class="form-control" placeholder="Page Title"/>
+            <label>Description</label>
+            <input ng-model="model.page.description" class="form-control" placeholder="Page Description"/>
         </div>
+        <!--<a ng-click="model.updatepage()" class="btn btn-danger btn-block">Update</a>-->
+        <a ng-click="model.deletepage()" class="btn btn-danger btn-block">Delete</a>
     </form>
     </div>
 
@@ -56,7 +49,7 @@
             <div class="row">
                 <div class="col-sm-12">
                     <p class="pull-right">
-                    <a href="/assignment/user/profile.html">
+                    <a ng-click="model.profile()">
                         <span class="glyphicon glyphicon-user white-color"></span>
                     </a>
                     </p>
@@ -65,5 +58,3 @@
         </div>
         </div>
     </nav>
-</body>
-</html>

@@ -1,20 +1,11 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Website List</title>
-    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet"/>
-    <link href="../css/style.css" rel="stylesheet"/>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-</head>
-<body>
+
 <nav class="navbar navbar-primary navbar-fixed-top">
     <div class="container-fluid">
         <div class="navbar-header btn-block">
             <div class="row">
                 <div class="col-sm-12">
                     <p class="navbar-text pull-left">
-                        <a href="/assignment/user/profile.html" class="navbar-link">
+                        <a ng-click="model.goback()" class="navbar-link">
                             <span class="glyphicon glyphicon-chevron-left white-color">
                             </span>
                         </a>
@@ -23,7 +14,7 @@
                         Websites
                     </a>
                     <p class="navbar-text pull-right">
-                        <a href="website-new.html" class="navbar-link">
+                        <a ng-click="model.newwebsite()" class="navbar-link">
                             <span class="glyphicon glyphicon-plus white-color">
                             </span>
                         </a>
@@ -35,51 +26,70 @@
 </nav>
 
 <div class="container">
+    <table class="table table-responsive top-margin">
+        <tbody>
+        <!--<div ng-repeat="website in model.websites">-->
+        <tr ng-repeat="wb in model.websites">
+            <td>
+                <a ng-click="model.websitepage(wb._id)">{{wb.name}}</a>
+            </td>
+            <td>
+                <a ng-click="model.editwebsite(wb._id)">
+                    <scan class="glyphicon glyphicon-cog"></scan>
+                </a>
+            </td>
+        </tr>
+        <!--</div>-->
+        </tbody>
+    </table>
+</div>
+
+<!--<div class="container">
 <table class="table table-responsive top-margin">
     <tbody>
         <tr>
             <td>
-                <a href="/assignment/page/page-list.html">Address Book App</a>
+                <a href="#/user/:uid/website/:wid/page">Address Book App</a>
             </td>
             <td>
-                <a href="website-edit.html">
+                <a href="#/user/:uid/website/:wid">
                     <scan class="glyphicon glyphicon-cog"></scan>
                 </a>
             </td>
         </tr>
         <tr>
             <td>
-                <a href="/assignment/page/page-list.html">Blogger</a>
+                <a href="#/user/:uid/website/:wid/page">Blogger</a>
             </td>
             <td>
-                <a href="website-edit.html">
+                <a href="#/user/:uid/website/:wid">
                     <scan class="glyphicon glyphicon-cog"></scan>
                 </a>
             </td>
         </tr>
         <tr>
             <td>
-                <a href="/assignment/page/page-list.html">Blogging App</a>
+                <a href="#/user/:uid/website/:wid/page">Blogging App</a>
             </td>
             <td>
-                <a href="website-edit.html">
+                <a href="#/user/:uid/website/:wid">
                     <scan class="glyphicon glyphicon-cog"></scan>
                 </a>
             </td>
         </tr>
         <tr>
             <td>
-                <a href="/assignment/page/page-list.html">Script Testing App</a>
+                <a href="#/user/:uid/website/:wid/page">Script Testing App</a>
             </td>
             <td>
-                <a href="website-edit.html">
+                <a href="#/user/:uid/website/:wid">
                     <scan class="glyphicon glyphicon-cog"></scan>
                 </a>
             </td>
         </tr>
     </tbody>
 </table>
-</div>
+</div>-->
 
 <nav class="navbar navbar-primary navbar-fixed-bottom">
     <div class="container-fluid">
@@ -87,7 +97,7 @@
         <div class="row">
             <div class="col-sm-12">
                 <p class="pull-right">
-                <a href="/assignment/user/profile.html">
+                <a ng-click="model.profile()">
                     <span class="glyphicon glyphicon-user white-color"></span>
                 </a>
                 </p>
@@ -96,5 +106,3 @@
     </div>
     </div>
 </nav>
-</body>
-</html>

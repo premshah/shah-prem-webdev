@@ -1,13 +1,4 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Widget List</title>
-    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet"/>
-    <link href="../css/style.css" rel="stylesheet"/>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-</head>
-<body>
+
     <nav class="navbar navbar-default navbar-fixed-top">
         <div class="container-fluid">
 
@@ -15,7 +6,7 @@
                 <div class="row">
                     <div class="col-xs-12">
                         <p class="navbar-text pull-left">
-                            <a href="/assignment/page/page-list.html" class="navbar-link">
+                            <a ng-click="model.goback()" class="navbar-link">
                                 <span class="glyphicon glyphicon-chevron-left white-color">
                                 </span>
                             </a>
@@ -24,7 +15,7 @@
                             Widgets
                         </a>
                         <p class="navbar-text pull-right">
-                            <a href="widget-chooser.html" class="navbar-link">
+                            <a ng-click="model.gotoaddwidget()" class="navbar-link">
                                 <span class="glyphicon glyphicon-plus white-color">
                                 </span>
                             </a>
@@ -36,10 +27,52 @@
         </div>
     </nav>
 
-    <div class="container top-margin">
+    <div class="container top-margin add-scrollbar">
+        <div class="btn-block" ng-repeat="widget in model.widgets">
+            <div class="pms-toolbar">
+                <a ng-click="model.gotoeditwidget(widget._id)">
+                    <span class="glyphicon glyphicon-cog white-color"></span>
+                </a>
+                <span class="glyphicon glyphicon-menu-hamburger"></span>
+            </div>
+            <div ng-switch="widget.widgetType">
+                <div ng-switch-when="HEADER" ng-switch="widget.size">
+                    <div ng-switch-when=1>
+                        <h1>{{widget.text}}</h1>
+                    </div>
+                    <div ng-switch-when=2>
+                        <h2>{{widget.text}}</h2>
+                    </div>
+                    <div ng-switch-when=3>
+                        <h3>{{widget.text}}</h3>
+                    </div>
+                    <div ng-switch-when=4>
+                        <h4>{{widget.text}}</h4>
+                    </div>
+                    <div ng-switch-when=5>
+                        <h5>{{widget.text}}</h5>
+                    </div>
+                    <div ng-switch-when=6>
+                        <h6>{{widget.text}}</h6>
+                    </div>
+                </div>
+                <div ng-switch-when="HTML">
+                    {{model.getTrustedHtml(widget.text)}}
+                </div>
+                <div ng-switch-when="IMAGE">
+                    <img ng-src="{{widget.url}}" width="{{widget.width}}">
+                </div>
+                <div ng-switch-when="YOUTUBE">
+                    <iframe width="100%" ng-src="{{model.doYouTrustUrl(widget.url)}}" frameborder="0" allowfullscreen></iframe>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!--<div class="container top-margin">
     <div class="btn-block">
         <div class="pms-toolbar">
-            <a href="widget-heading.html">
+            <a href="widget-HEADER.view.client.html">
                 <scan class="glyphicon glyphicon-cog white-color"></scan>
             </a>
             <scan class="glyphicon glyphicon-menu-hamburger"></scan>
@@ -48,7 +81,7 @@
     </div>
     <div class="btn-block">
         <div class="pms-toolbar">
-            <a href="widget-heading.html">
+            <a href="widget-HEADER.view.client.html">
                 <scan class="glyphicon glyphicon-cog white-color"></scan>
             </a>
             <scan class="glyphicon glyphicon-menu-hamburger"></scan>
@@ -57,7 +90,7 @@
     </div>
     <div class="btn-block">
         <div class="pms-toolbar">
-            <a href="widget-image.html">
+            <a href="widget-IMAGE.view.client.html">
                 <scan class="glyphicon glyphicon-cog white-color"></scan>
             </a>
             <scan class="glyphicon glyphicon-menu-hamburger"></scan>
@@ -81,7 +114,7 @@
     </div>
     <div class="btn-block">
         <div class="pms-toolbar">
-            <a href="widget-youtube.html">
+            <a href="widget-YOUTUBE.view.client.html">
                 <scan class="glyphicon glyphicon-cog white-color"></scan>
             </a>
             <scan class="glyphicon glyphicon-menu-hamburger"></scan>
@@ -108,7 +141,7 @@
             stabilizes the Earth's orientation on its axis, and gradually slows its rotation.[31]
         </p>
     </div>
-    </div>
+    </div>-->
 
     <nav class="navbar navbar-default navbar-fixed-bottom">
         <div class="container-fluid">
@@ -124,7 +157,7 @@
                 </div>
                 <div class="col-xs-8">
                     <p class="navbar-text pull-right">
-                        <a href="/assignment/user/profile.html">
+                        <a ng-click="model.profile()">
                             <span class="glyphicon glyphicon-user white-color"></span>
                         </a>
                     </p>
@@ -133,5 +166,3 @@
         </div>
         </div>
     </nav>
-</body>
-</html>

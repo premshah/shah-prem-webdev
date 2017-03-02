@@ -17,8 +17,11 @@ module.exports = function (app) {
 
   function createWebsite(req, res) {
       var wb = req.body;
+      var userId = req.params['userId'];
+      wb.developerId = userId;
       wb._id = (new Date()).getTime() + "";
       websites.push(wb);
+      //console.log(websites);
       res.json(wb);
   }
 

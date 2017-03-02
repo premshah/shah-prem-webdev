@@ -67,9 +67,11 @@
             $location.url("/user/" + userId + "/website/" + webId);
         }
         function addwebsite() {
+            //console.log("add");
             var promise = WebsiteService.createWebsite(userId,vm.website);
 
             promise.success(function (response) {
+                //console.log(response);
                 $location.url("/user/" + userId + "/website");
             });
 

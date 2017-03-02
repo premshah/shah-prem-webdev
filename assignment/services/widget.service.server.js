@@ -48,6 +48,40 @@ module.exports = function (app) {
 
 
     function updateWidgetList(req, res) {
+        /*var pageId = req.params['pageId'];
+        var startIndex = req.query['initial'];
+        var endIndex = req.query['final'];
+        var wgd=[];
+
+        for(var w in widgets) {
+            if(widgets[w].pageId==pageId) {
+                wgd.push(widgets[w]);
+                widgets.splice(w,1);
+            }
+        }
+        //console.log(wgd);
+
+        if(startIndex>endIndex){
+            for(var i=startIndex;i=endIndex;i++) {
+                var t = wgd[i];
+                wgd[i] = wgd[i+1];
+                wgd[i+1] = t;
+                //console.log(t);
+            }
+        }
+        else {
+            for(var i=endIndex;i>startIndex;i--) {
+                var t = wgd[i];
+                wgd[i] = wgd[i-1];
+                wgd[i-1] = t;
+                //console.log(t);
+            }
+        }
+
+        for(var w in wgd) {
+            widgets.push(wgd[w]);
+        }
+        console.log(widgets);*/
         var pageId = req.params['pageId'];
         var startIndex = req.query['initial'];
         var endIndex = req.query['final'];

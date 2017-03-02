@@ -23,6 +23,7 @@
         return api;
 
         function createWebsite(userId, website){
+            //console.log("client");
             return $http.post("/api/user/" + userId + "/website",website);
         }
         function  findWebsitesByUser(userId){

@@ -28,6 +28,7 @@
     </nav>
 
     <div class="container top-margin add-scrollbar">
+        <wbdv-sortable pgid="{{model.pgId}}">
         <div class="btn-block" ng-repeat="widget in model.widgets">
             <div class="pms-toolbar">
                 <a ng-click="model.gotoeditwidget(widget._id)">
@@ -67,6 +68,7 @@
                 </div>
             </div>
         </div>
+        </wbdv-sortable>
     </div>
 
     <!--<div class="container top-margin">

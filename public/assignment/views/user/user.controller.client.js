@@ -14,12 +14,15 @@
             $location.url("/register");
         }
         function login(user) {
-            user = UserService.findUserByCredentials(user.username, user.password);
-            if(user) {
-                $location.url("/user/" + user._id);
-            } else {
-                vm.alert = "Unable to login";
-            }
+            var promise = UserService.findUserByCredentials(user.username, user.password);
+
+            promise.success(function (user) {
+                if(user) {
+                    $location.url("/user/" + user._id);
+                } else {
+                    vm.alert = "Unable to login";
+                }
+            });
         }
 
     }
@@ -29,8 +32,12 @@
         vm.cancel = cancel;
 
         function registerUser(user){
-           var userID =  UserService.createUser(user);
-            $location.url("/user/" + userID);
+           var promise =  UserService.createUser(user);
+
+           promise.success(function (userID) {
+               $location.url("/user/" + userID);
+           });
+
         }
         function cancel() {
             $location.url("/login");
@@ -55,7 +62,11 @@
             $location.url("/user/" + userId);
         }
         function init() {
-            vm.user = UserService.findUserById(userId);
+            var promise = UserService.findUserById(userId);
+
+            promise.success(function (response) {
+                vm.user = response;
+            });
         }
         init();
     }

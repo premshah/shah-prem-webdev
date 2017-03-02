@@ -31,7 +31,11 @@
             $location.url("/user/" + userId);
         }
         function init() {
-            vm.pages = PageService.findPagesByWebsiteId(websiteId);
+            var promise = PageService.findPagesByWebsiteId(websiteId);
+
+            promise.success(function (response) {
+                vm.pages = response;
+            });
         }
         init();
     }
@@ -47,8 +51,12 @@
             $location.url("/user/" + userId + "/website/" + websiteId + "/page/");
         }
         function pagelist() {
-            PageService.createPage(websiteId,vm.page);
-            $location.url("/user/" + userId + "/website/" + websiteId + "/page/");
+            var promise = PageService.createPage(websiteId,vm.page);
+
+            promise.success(function (response) {
+                $location.url("/user/" + userId + "/website/" + websiteId + "/page/");
+            })
+
         }
         function profile() {
             $location.url("/user/" + userId);
@@ -69,23 +77,39 @@
             $location.url("/user/" + userId + "/website/" + websiteId + "/page/");
         }
         function pagelist() {
-            PageService.createPage(websiteId,vm.page);
-            $location.url("/user/" + userId + "/website/" + websiteId + "/page/");
+            var promise = PageService.createPage(websiteId,vm.page);
+
+            promise.success(function (response) {
+                $location.url("/user/" + userId + "/website/" + websiteId + "/page/");
+            });
+
         }
         function profile() {
             $location.url("/user/" + userId);
         }
         function updatepage() {
-            PageService.updatePage(pageId,vm.page);
-            $location.url("/user/" + userId + "/website/" + websiteId + "/page/");
+            var promise = PageService.updatePage(pageId,vm.page);
+
+            promise.success(function (response) {
+                $location.url("/user/" + userId + "/website/" + websiteId + "/page/");
+            });
+
         }
         function deletepage() {
-            PageService.deletePage(pageId);
-            $location.url("/user/" + userId + "/website/" + websiteId + "/page/");
+            var promise = PageService.deletePage(pageId);
+
+            promise.success(function (response) {
+                $location.url("/user/" + userId + "/website/" + websiteId + "/page/");
+            });
+
         }
         function init()
         {
-            vm.page = PageService.findPageById(pageId);
+            var promise = PageService.findPageById(pageId);
+
+            promise.success(function (response) {
+                vm.page = response;
+            })
         }
         init();
     }

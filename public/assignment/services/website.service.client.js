@@ -3,7 +3,7 @@
         .module("WebAppMaker")
         .factory("WebsiteService", WebsiteService);
 
-    function WebsiteService() {
+    function WebsiteService($http) {
         var websites = [
             { "_id": "123", "name": "Facebook",    "developerId": "456", "description": "Lorem" },
             { "_id": "234", "name": "Tweeter",     "developerId": "456", "description": "Lorem" },
@@ -23,60 +23,19 @@
         return api;
 
         function createWebsite(userId, website){
-            var wb = {
-                _id: String(new Date().getTime()),
-                name: website.websitename,
-                developerId: userId,
-                description: website.websitedescription
-            }
-
-            websites.push(wb);
-            return wb._id;
+            return $http.post("/api/user/" + userId + "/website",website);
         }
         function  findWebsitesByUser(userId){
-            wb = [];
-            for (website in websites){
-                if(websites[website].developerId==userId)
-                {
-                    //console.log(websites[website]);
-                    wb.push(websites[website]);
-                }
-            }
-            return wb;
+            return $http.get("/api/user/" + userId + "/website");
         }
         function findWebsiteById(websiteId){
-            var index;
-            for (website in websites){
-                if(websites[website]._id==websiteId)
-                {
-                    index = website;
-                }
-            }
-            var wbsite = websites[index];
-            return wbsite;
+            return $http.get("/api/website/" + websiteId);
         }
         function updateWebsite(websiteId, website){
-            var index;
-            for (wbs in websites){
-                if(websites[wbs]._id==websiteId)
-                {
-                    index = wbs;
-                }
-            }
-            //console.log(index);
-            //console.log(website.name);
-            websites[index].name = website.name;
-            websites[index].description = website.description;
+            return $http.put("/api/website/" + websiteId, website);
         }
         function deleteWebsite(websiteId){
-            var index;
-            for (website in websites){
-                if(websites[website]._id==websiteId)
-                {
-                    index = website;
-                }
-            }
-            websites.splice(index,1);
+            return $http.delete("/api/website/" + websiteId);
         }
     }
 }) ();

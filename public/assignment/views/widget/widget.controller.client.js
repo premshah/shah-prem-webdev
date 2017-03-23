@@ -22,8 +22,8 @@
         function init() {
             var promise = WidgetService.findWidgetByPageId(pageId);
 
-            promise.success(function (response) {
-                vm.widgets = response;
+            promise.success(function (page) {
+                vm.widgets = page.widgets;
             })
         }
         init();
@@ -35,9 +35,7 @@
             return $sce.trustAsResourceUrl(baseUrl);
         }
         function getTrustedHtml(html) {
-            var t1 = html.split('>');
-            var txt = t1[1].split('<');
-            return $sce.trustAsHtml(txt[0]);
+            return $sce.trustAsHtml(html);
         }
         function goback() {
             $location.url("/user/" + userId +"/website/" + websiteId +"/page");
@@ -64,8 +62,9 @@
 
         vm.header = "HEADER";
         vm.html = "HTML";
-        vm.youtube = "YOTUBE";
+        vm.youtube = "YOUTUBE";
         vm.image = "IMAGE";
+        vm.text = "TEXT";
 
         function goback() {
             $location.url("/user/" + userId + "/website/" + websiteId + "/page/" + pageId + "/widget");
@@ -74,13 +73,13 @@
             $location.url("/user/" + userId);
         }
         function addwidget(wgdType) {
-            //console.log(wgdType);
             var promise = WidgetService.createWidget(pageId,wgdType);
 
             promise.success(function (response) {
-                var wgdId = response;
+                //console.log(response);
+                var wgdId = response._id;
                 $location.url("/user/" + userId + "/website/" + websiteId + "/page/" + pageId + "/widget/" + wgdId);
-            })
+            });
 
         }
     }
@@ -92,12 +91,21 @@
         var userId = $routeParams['uid'];
         var websiteId = $routeParams['wid'];
 
+        vm.wbId = $routeParams['wid'];
+        vm.pgId = $routeParams['pid'];
+        vm.usrId = $routeParams['uid'];
+
         vm.getEditorTemplateUrl = getEditorTemplateUrl;
         vm.deletewidget = deletewidget;
         vm.goback = goback;
         vm.profile = profile;
         vm.updatewidget = updatewidget;
+        vm.gotoflicker = gotoflicker;
 
+        function gotoflicker() {
+            $location.url("/user/" + userId + "/website/" + websiteId + "/page/" + pageId + "/widget/"+ widgetId +"/flickr");
+        }
+        
         function init() {
             var promise = WidgetService.findWidgetById(widgetId);
 
@@ -127,6 +135,7 @@
             var promise = WidgetService.updateWidget(widgetId,vm.widget);
 
             promise.success(function (response) {
+                //console.log(response);
                 $location.url("/user/" + userId + "/website/" + websiteId + "/page/" + pageId + "/widget");
             })
 

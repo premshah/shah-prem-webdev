@@ -21,14 +21,17 @@
             "findWidgetById" : findWidgetById,
             "findWidgetByPageId" : findWidgetsByPageId,
             "updateWidget" : updateWidget,
-            "deleteWidget" : deleteWidget
+            "deleteWidget" : deleteWidget,
+            "reorderWidget" : reorderWidget
         };
         return api;
 
+        function reorderWidget(pageId,startIndex,endIndex) {
+            return $http.put("/page/" + pageId + "/widget?start=" + startIndex + " &end=" + endIndex);
+        }
+
         function createWidget(pageId, wgdType){
-            //console.log(wgdType);
             var str = '{"type" : "'+wgdType+'"}';
-            //console.log(str);
             return $http.post("/api/page/"+ pageId + "/widget", JSON.parse(str));
         }
         function findWidgetsByPageId(pageId){

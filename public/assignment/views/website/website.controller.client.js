@@ -33,10 +33,13 @@
             $location.url("/user/" + userId);
         }
         function init() {
+            //console.log("initialize");
             var promise = WebsiteService.findWebsitesByUser(userId);
 
-            promise.success(function (response) {
-                vm.websites = response;
+            promise.success(function (user) {
+                //console.log(user);
+                vm.websites = user.websites;
+                //console.log(userId + vm.websites);
             });
             //console.log(vm.websites);
         }
@@ -82,8 +85,8 @@
         function init() {
             var promise = WebsiteService.findWebsitesByUser(userId);
 
-            promise.success(function (response) {
-                vm.websites = response;
+            promise.success(function (user) {
+                vm.websites = user.websites;
             })
             //console.log(vm.websites);
         }
@@ -129,8 +132,8 @@
             var promise1 = WebsiteService.findWebsitesByUser(userId);
             var promise2 = WebsiteService.findWebsiteById(websiteId);
 
-            promise1.success(function (response) {
-                vm.websites = response;
+            promise1.success(function (user) {
+                vm.websites = user.websites;
             });
 
             promise2.success(function (response) {

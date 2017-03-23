@@ -1,9 +1,9 @@
 (function () {
     angular
-        .module('WebAppMaker')
-        .directive('wbdvSortable', sortableDir);
+        .module('wamDirectives', [])
+        .directive('wamSortable', sortableDir);
 
-    function sortableDir($http) {
+    function sortableDir(WidgetService) {
         function linkFunc(scope, element, attribute) {
             var startIndex = -1;
             var endIndex = -1;
@@ -17,7 +17,7 @@
                 },
                 stop: function (event, ui) {
                     endIndex = ui.item.index();
-                    $http.put("/page/" + pageId + "/widget?initial=" + startIndex + " &final=" + endIndex);
+                    WidgetService.reorderWidget(pageId,startIndex,endIndex);
                     console.log([startIndex, endIndex]);
                 }
             });

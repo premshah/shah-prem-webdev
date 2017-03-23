@@ -33,8 +33,8 @@
         function init() {
             var promise = PageService.findPagesByWebsiteId(websiteId);
 
-            promise.success(function (response) {
-                vm.pages = response;
+            promise.success(function (website) {
+                vm.pages = website.pages;
             });
         }
         init();

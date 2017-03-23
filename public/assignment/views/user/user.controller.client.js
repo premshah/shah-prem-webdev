@@ -59,7 +59,11 @@
             $location.url("/login");
         }
         function profile() {
-            $location.url("/user/" + userId);
+            var promise = UserService.updateUser(userId, vm.user);
+
+            promise.success(function (response) {
+                $location.url("/user/" + userId);
+            });
         }
         function init() {
             var promise = UserService.findUserById(userId);

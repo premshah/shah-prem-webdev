@@ -1,0 +1,52 @@
+ul
+{
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+}
+
+.container
+{
+    background-color: indianred;
+    width: 800px;
+    height: 500px;
+    margin-bottom: 5%;
+    margin-top: 5%;
+}
+
+.container-fluid
+{
+    width: 80%;
+    height: 80%;
+}
+
+#startLine
+{
+    color: whitesmoke;
+    text-align: center;
+}
+
+#quiz
+{
+
+    width: 400px;
+}
+
+.text-capitalize
+{
+    color: white;
+}
+
+#message
+{
+    margin-top: 5%;
+    font-size: 4ch;
+}
+
+.btn
+{
+    background-color: white;
+    color: indianred;
+    border: none;
+    margin-top: 5%;
+}

@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="SocialNetworkSharing">
+<head>
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet"/>
+    <script
+            src="https://code.jquery.com/jquery-3.1.1.min.js"
+            integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8="
+            crossorigin="anonymous"></script>
+    <script
+            src="http://code.jquery.com/ui/1.12.1/jquery-ui.min.js"
+            integrity="sha256-VazP97ZCwtekAsvgPBSUwPFKdrwD3unUfSGVYrahUqU="
+            crossorigin="anonymous"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.7/angular.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular-route.js"></script>
+    <script src="app.js"></script>
+    <script src="config.js"></script>
+    <script src="controller.js"></script>
+    <script src="share.service.client.js"></script>
+
+    <!-- Twitter-->
+    <script>window.twttr = (function(d, s, id) {
+        var js, fjs = d.getElementsByTagName(s)[0],
+            t = window.twttr || {};
+        if (d.getElementById(id)) return t;
+        js = d.createElement(s);
+        js.id = id;
+        js.src = "https://platform.twitter.com/widgets.js";
+        fjs.parentNode.insertBefore(js, fjs);
+
+        t._e = [];
+        t.ready = function(f) {
+            t._e.push(f);
+        };
+
+        return t;
+    }(document, "script", "twitter-wjs"));</script>
+
+    <!--linkedin-->
+    <script type="text/javascript" src="//platform.linkedin.com/in.js">
+        api_key:   77z8zvyrwgleji
+        authorize: false
+        onLoad: onLinkedInLoad
+    </script>
+    <meta charset="UTF-8">
+    <title>Social Network sdk use</title>
+</head>
+<body>
+<script type="text/javascript">
+
+    // Setup an event listener to make an API call once auth is complete
+    function onLinkedInLoad() {
+        IN.Event.on(IN, "auth", getProfileData);
+    }
+
+    // Handle the successful return from the API call
+    function onSuccess(data) {
+        console.log(data);
+    }
+
+    // Handle an error response from the API call
+    function onError(error) {
+        console.log(error);
+    }
+
+    // Use the API call wrapper to request the member's basic profile data
+    function getProfileData() {
+        IN.API.Raw("/people/~").result(onSuccess).error(onError);
+    }
+
+</script>
+
+<!-- Facebook-->
+<script>
+    window.fbAsyncInit = function() {
+        FB.init({
+            appId      : '1799845453616757',
+            xfbml      : true,
+            version    : 'v2.8'
+        });
+        FB.AppEvents.logPageView();
+    };
+
+    (function(d, s, id){
+        var js, fjs = d.getElementsByTagName(s)[0];
+        if (d.getElementById(id)) {return;}
+        js = d.createElement(s); js.id = id;
+        js.src = "//connect.facebook.net/en_US/sdk.js";
+        fjs.parentNode.insertBefore(js, fjs);
+    }(document, 'script', 'facebook-jssdk'));
+</script>
+<div ng-view></div>
+</body>
+</html>

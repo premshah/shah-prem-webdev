@@ -9,13 +9,15 @@ module.exports = function(app) {
 
     app.get("/api/user?username=username&password=password", findUserByCredentials);*/
 
-    require("./services/user.service.server.js")(app);
-    require("./services/website.service.server.js")(app);
-    require("./services/page.service.server.js")(app);
-    require("./services/widget.service.server.js")(app);
+    var model = require("./model/models.server.js")();
+
+    require("./services/user.service.server.js")(app, model);
+    require("./services/website.service.server.js")(app, model);
+    require("./services/page.service.server.js")(app, model);
+    require("./services/widget.service.server.js")(app, model);
 
     /*function findUserByCredentials(req, res){
-        var username = req.query['username'];
+        var username = req.query['username'];,
         var password = req.query['password'];
         console.log(username);
         var user = users.find(function(u){

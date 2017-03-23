@@ -27,6 +27,7 @@
             return $http.post("/api/user/" + userId + "/website",website);
         }
         function  findWebsitesByUser(userId){
+            //console.log("client");
             return $http.get("/api/user/" + userId + "/website");
         }
         function findWebsiteById(websiteId){

@@ -28,15 +28,15 @@
     </nav>
 
     <div class="container top-margin add-scrollbar">
-        <wbdv-sortable pgid="{{model.pgId}}">
+        <wam-sortable pgid="{{model.pgId}}">
         <div class="btn-block" ng-repeat="widget in model.widgets">
             <div class="pms-toolbar">
                 <a ng-click="model.gotoeditwidget(widget._id)">
-                    <span class="glyphicon glyphicon-cog white-color"></span>
+                    <span class="glyphicon glyphicon-cog red-color"></span>
                 </a>
                 <span class="glyphicon glyphicon-menu-hamburger"></span>
             </div>
-            <div ng-switch="widget.widgetType">
+            <div ng-switch="widget.type">
                 <div ng-switch-when="HEADER" ng-switch="widget.size">
                     <div ng-switch-when=1>
                         <h1>{{widget.text}}</h1>
@@ -58,17 +58,27 @@
                     </div>
                 </div>
                 <div ng-switch-when="HTML">
-                    {{model.getTrustedHtml(widget.text)}}
+                    <span ng-bind-html="model.getTrustedHtml(widget.text)"></span>
                 </div>
                 <div ng-switch-when="IMAGE">
                     <img ng-src="{{widget.url}}" width="{{widget.width}}">
                 </div>
-                <div ng-switch-when="YOUTUBE">
-                    <iframe width="100%" ng-src="{{model.doYouTrustUrl(widget.url)}}" frameborder="0" allowfullscreen></iframe>
+                <div ng-switch-when="YOUTUBE" class="youtube-widget">
+                    <iframe width="{{widget.width}}%" ng-src="{{model.doYouTrustUrl(widget.url)}}" frameborder="0" allowfullscreen></iframe>
+                </div>
+                <div ng-switch-when="TEXT">
+                    <div ng-if="widget.formatted" ng-model="widget.text" text-angular ta-toolbar="[['h1','h2','h3'],['bold','italics','underline','strikeThrough'],
+                        ['ul','ol'],['justifyLeft','justifyCenter','justifyRight','justifyFull'],
+                        ['indent','outdent'],['html']]"></div>
+                    <input ng-if="!widget.formatted && (!widget.rows || widget.rows===1)"
+                           placeholder="{{widget.placeholder}}" class="form-control"/>
+                    <textarea ng-if="!widget.formatted && (widget.rows > 1)"
+                              rows="{{widget.rows}}" placeholder="{{widget.placeholder}}"
+                              class="form-control">{{widget.text}}</textarea>
                 </div>
             </div>
         </div>
-        </wbdv-sortable>
+        </wam-sortable>
     </div>
 
     <!--<div class="container top-margin">

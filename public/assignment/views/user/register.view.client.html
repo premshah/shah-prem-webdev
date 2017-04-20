@@ -1,19 +1,26 @@
 
-    <div class="container top-margin">
+    <div class="container-fluid top-margin">
         <h1>Register</h1>
-        <input type="text"
-               ng-model="model.user.username"
-               class="form-control"
-               placeholder="username"/>
-        <input type="password"
-               ng-model="model.user.password"
-               class="form-control"
-               placeholder="password"/>
-        <input type="password"
-               class="form-control"
-               placeholder="very password"/>
-        <a class="btn btn-primary btn-block"
-           ng-click="model.registerUser(model.user)">Register</a>
-        <a class="btn btn-danger  btn-block"
-           ng-click="model.cancel()">Cancel</a>
+
+        <form name="form1" novalidate>
+
+            <div class="form-group">
+                <input type="text" ng-model="model.user.username" name="username" class="form-control" placeholder="username" required/>
+                <div class="alert alert-danger" ng-show="form1.$submitted && form1.username.$error.required">Please Enter Username</div>
+            </div>
+
+            <div class="form-group">
+                <input type="password" ng-model="model.user.password" name="password" class="form-control" placeholder="password" required/>
+                <div class="alert alert-danger" ng-show="form1.$submitted && form1.password.$error.required">Please Enter Password</div>
+            </div>
+
+            <div class="form-group">
+                <input type="password" class="form-control" ng-model="confirmPassword" match-password="model.user.password" name="confirmPassword" placeholder="confirm password" required/>
+                <div class="alert alert-danger" ng-show="form1.$submitted && form1.confirmPassword.$error.required">Please Enter Confirm Password</div>
+                <div class="alert alert-danger" ng-show="form1.$submitted && !form1.confirmPassword.$error.required && form1.confirmPassword.$error.matchPassword">Password and Confirm Password not matching</div>
+            </div>
+        <button class="btn btn-primary btn-block" ng-click="form1.$valid && model.registerUser(model.user)">Register</button>
+        <a class="btn btn-danger  btn-block" ng-click="model.cancel()">Cancel</a>
+
+        </form>
     </div>

@@ -1,0 +1,53 @@
+Select Category:
+<div uib-dropdown>
+    <button class="btn btn-default" type="button" uib-dropdown-toggle>
+        {{model.selectedItem}}
+        <span class="caret"></span>
+    </button>
+    <ul uib-dropdown-menu>
+        <li ng-repeat="a in model.categories"><a ng-click="model.dropboxitemselected(a)">{{a}}</a></li>
+    </ul>
+</div>
+<br/>
+<br/>
+
+Question Type:
+<div class="radio"><label><input ng-click="model.getType('fib')" name="quizType" type="radio">Fill In The Blanks</input></label></div>
+<div class="radio"><label><input ng-click="model.getType('dropdown')" name="quizType" type="radio">DropDown</input></label></div>
+<br/>
+<br/>
+
+Order of questions:
+<div class="radio"><label><input ng-click="model.getOrder('random')" name="wordOrder" type="radio">Random</input></label></div>
+<div class="radio"><label><input ng-click="model.getOrder('inorder')" name="wordOrder" type="radio">In Order</input></label></div>
+<br/>
+<br/>
+
+Number of Words:
+<div uib-dropdown>
+    <button class="btn btn-default" type="button" uib-dropdown-toggle>
+        {{model.selectedNumber}}
+        <span class="caret"></span>
+    </button>
+    <ul uib-dropdown-menu>
+        <li ng-repeat="n in model.numberOfWords"><a ng-click="model.dropboxNumberSelected(n)">{{n}}</a></li>
+    </ul>
+</div>
+<br/>
+<br/>
+
+Translate From:
+<div uib-dropdown>
+    <button class="btn btn-default" type="button" uib-dropdown-toggle>
+        {{model.selectedLanguage}}
+        <span class="caret"></span>
+    </button>
+    <ul uib-dropdown-menu>
+        <li ng-repeat="n in model.languages"><a ng-click="model.dropboxLanguageSelected(n)">{{n}}</a></li>
+    </ul>
+</div>
+<br/>
+<br/>
+
+<button class="btn btn-primary" ng-click="model.insert()">Insert</button>
+<button class="btn btn-primary" ng-click="model.gotoQuiz()">Submit</button>

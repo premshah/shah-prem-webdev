@@ -5,16 +5,39 @@
         .controller("RegisterController", RegisterController)
         .controller("ProfileController", ProfileController)
 
-    function LoginController($location, UserService) {
+    function LoginController($location, UserService, $rootScope, $scope) {
         var vm = this;
         vm.login = login;
         vm.register = register;
+        vm.fbclick = fbclick;
+
+        function fbclick() {
+            var promise =  UserService.createFBUser();
+
+            promise.success(function (user) {
+                    $rootScope.currentUser = user;
+                    $location.url("/user/" + user._id);
+            });
+        }
 
         function register() {
             $location.url("/register");
         }
         function login(user) {
-            var promise = UserService.findUserByCredentials(user.username, user.password);
+
+            console.log("user");
+            UserService
+                .login(user)
+                .then(
+                    function(response) {
+                        var user = response.data;
+                        $rootScope.currentUser = user;
+                        $location.url("/user/"+user._id);
+                    });
+
+
+
+            /*var promise = UserService.findUserByCredentials(user.username, user.password);
 
             promise.success(function (user) {
                 if(user) {
@@ -22,11 +45,11 @@
                 } else {
                     vm.alert = "Unable to login";
                 }
-            });
+            });*/
         }
 
     }
-    function RegisterController($location, UserService) {
+    function RegisterController($location, UserService, $rootScope) {
         var vm = this;
         vm.registerUser = registerUser;
         vm.cancel = cancel;
@@ -34,8 +57,13 @@
         function registerUser(user){
            var promise =  UserService.createUser(user);
 
-           promise.success(function (userID) {
-               $location.url("/user/" + userID);
+           promise.success(function (user) {
+               var prm = UserService.updateUserFacebookId(user);
+
+               prm.success(function (status) {
+                   $rootScope.currentUser = user;
+                   $location.url("/user/" + user._id);
+               })
            });
 
         }
@@ -43,7 +71,7 @@
             $location.url("/login");
         }
     }
-    function ProfileController($routeParams, $location, UserService) {
+    function ProfileController($routeParams, $location, UserService, $rootScope) {
         var vm = this;
         var userId = $routeParams['uid'];
         vm.website = website;
@@ -56,7 +84,14 @@
         }
         function logout()
         {
-            $location.url("/login");
+            UserService
+                .logout()
+                .then(
+                    function(response) {
+                        $rootScope.currentUser = null;
+                        $location.url("/");
+                    })
+
         }
         function profile() {
             var promise = UserService.updateUser(userId, vm.user);

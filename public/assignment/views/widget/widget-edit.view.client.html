@@ -1,3 +1,4 @@
+<form name="form1" novalidate class="top-margin">
 <nav class="navbar navbar-default navbar-fixed-top">
     <div class="container-fluid">
         <div class="navbar-text pull-left">
@@ -6,7 +7,7 @@
             </a>
         </div>
         <div class="navbar-text pull-right">
-            <a ng-click="model.updatewidget()">
+            <a onclick="$('#submitBtn').click();" ng-click="form1.$valid && model.updatewidget()">
                 <span class="glyphicon glyphicon-ok white-color"></span>
             </a>
         </div>
@@ -35,3 +36,4 @@
         </div>
     </div>
 </nav>
+</form>

@@ -23,67 +23,94 @@
 
     var questionNumber = 0;
     var selection = [];
-    var scoreCount = 0;
 
-    $(document).ready( function () {
+    $(document).ready(function () {
         var quiz = $("#quiz");
         displayNextQues();
         $("#next").click(
             function () {
                 choice();
 
-                if(selection[questionNumber]==undefined)
-                {
+                if (selection[questionNumber] == undefined) {
                     alert("Please select one option");
                 }
-                else
-                {
-                    if(selection[questionNumber]==questions[questionNumber].correctAnswer)
-                    {
-                        scoreCount++;
+                else {
+                    if (selection[questionNumber] == questions[questionNumber].correctAnswer) {
                         questionNumber++;
                         displayNextQues();
                     }
-                    else
-                    {
+                    else {
                         alert(" Wrong answer!!! Please select correct option");
                     }
 
                 }
             }
         );
+        $("#prev").click(
+            function () {
+                questionNumber--;
+                displayPrevQues();
+            }
+        );
+        $("#startAgain").click(
+            function () {
+                questionNumber = 0;
+                selection = [];
+                $("#message").text("");
+                $("#next").show();
+                displayNextQues();
+            }
+        );
 
+        function displayPrevQues() {
+            var ques = $("#question");
+            var option = $("#choices");
+            option.find("li").remove();
+            ques.find("p").remove();
+            if (questionNumber == 0) {
+                $("#prev").hide();
+            }
+            makeQuestion();
+            if(selection[questionNumber]!=undefined)
+            {
+                var radio = document.getElementsByName('ch');
+                for(var i=0;i<radio.length;i++)
+                {
+                    //var str = selection[questionNumber] + "/";
+                    if(i==selection[questionNumber])
+                    {
+                        radio[i].checked = true;
+                        break;
+                    }
+                }
+                //$('input[value='+selection[questionNumber]+']').prop('checked', true);
+            }
+        }
 
         function displayNextQues() {
-            if(questionNumber==0)
-            {
+            if (questionNumber == 0) {
                 $("#startAgain").hide();
                 $("#prev").hide();
                 $("#score").hide();
                 makeQuestion();
             }
-            else
-            {
+            else {
                 var ques = $("#question");
                 var option = $("#choices");
                 option.find("li").remove();
                 ques.find("p").remove();
-                if(questionNumber!=questions.length)
-                {
-                    if(questionNumber!=questions.length-1)
-                    {
+                if (questionNumber != questions.length) {
+                    if (questionNumber != questions.length - 1) {
                         $("#prev").show();
                     }
-                    else
-                    {
+                    else {
                         $("#prev").show();
 
                     }
                     makeQuestion();
                 }
-                else
-                {
-                    $("#message").text("Your score is " + scoreCount + "/" + questions.length);
+                else {
+                    $("#message").text("Quiz over, Please start again");
                     $("#startAgain").show();
                     $("#prev").hide();
                     $("#score").hide();
@@ -93,31 +120,25 @@
         }
 
         function makeQuestion() {
-           var ques = $("#question");
-           var option = $("#choices");
+            var ques = $("#question");
+            var option = $("#choices");
 
-           var quesForm = '<p class="text-capitalize">'+questions[questionNumber].question+'</p>';
-           ques.append(quesForm);
+            var quesForm = '<p class="text-capitalize">' + questions[questionNumber].question + '</p>';
+            ques.append(quesForm);
 
-           var optionForm = "";
-            for(i=0;i<questions[questionNumber].choices.length;i++)
-            {
-                optionForm += '<li><input type="radio" name="ch" value='+i+'/>'+questions[questionNumber].choices[i]+'</li>';
+            var optionForm = "";
+            for (i = 0; i < questions[questionNumber].choices.length; i++) {
+                optionForm += '<li><input type="radio" name="ch" value=' + i + '/>' + questions[questionNumber].choices[i] + '</li>';
             }
             option.append(optionForm);
-
-            quiz.append(ques);
-            quiz.append(option);
         }
-        });
 
-    function choice() {
+         function choice() {
+            selection[questionNumber] = $('input[name="ch"]:checked').val();
+             if (selection[questionNumber] != undefined) {
+                 selection[questionNumber] = selection[questionNumber].split("/")[0];
+             }
+         }
+    })
 
-        selection[questionNumber]= $("li [name='ch']:checked").val();
-        if(selection[questionNumber]!=undefined)
-        {
-            selection[questionNumber] = selection[questionNumber].split("/")[0];
-        }
-    }
-
-}) ();
+})();

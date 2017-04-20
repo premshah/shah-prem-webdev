@@ -12,9 +12,27 @@ module.exports = function () {
         updateUser: updateUser,
         deleteUser: deleteUser,
         setModel: setModel,
-        findAllWebsitesForUser:findAllWebsitesForUser
+        findUserByFacebookId: findUserByFacebookId,
+        findAllWebsitesForUser:findAllWebsitesForUser,
+        updateUserFacebookId: updateUserFacebookId
     };
     return api;
+
+    function updateUserFacebookId(userId, fb) {
+        return UserModel
+            .update(
+                {
+                    _id: userId
+                },
+                {
+                    facebook: fb
+                }
+            );
+    }
+
+    function findUserByFacebookId(facebookId) {
+        return UserModel.findOne({'facebook.id': facebookId});
+    }
 
     function findAllWebsitesForUser(userId) {
         //console.log("user model");

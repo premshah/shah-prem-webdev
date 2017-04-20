@@ -1,0 +1,16 @@
+Seconds Remaining:<timer finish-callback="model.timeFinish()" interval="1000" countdown="100">{{countdown}}</timer>
+<br/>
+<div id="set" ng-repeat="dt in model.questions|limitTo:model.nowords">
+    {{dt}} :
+    <div uib-dropdown>
+        <button class="btn btn-default" type="button" uib-dropdown-toggle>
+            {{model.selectedAnswer[$index]}}
+            <span class="caret"></span>
+        </button>
+        <ul uib-dropdown-menu>
+            <li ng-repeat="n in model.choices[$index]"><a ng-click="model.dropboxChoiceSelected(n,$parent.$index)">{{n}}</a></li>
+        </ul>
+    </div>
+</div>
+<br/>
+<button class="btn btn-primary" ng-click="model.nextSet()">Next</button>

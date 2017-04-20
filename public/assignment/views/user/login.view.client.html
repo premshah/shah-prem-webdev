@@ -1,16 +1,26 @@
 
-    <div class="container">
+    <div class="container-fluid">
         <h1>Login</h1>
-        <input type="text"
-               ng-model="model.user.username"
-               class="form-control"
-               placeholder="username"/>
-        <input type="password"
-               ng-model="model.user.password"
-               class="form-control"
-               placeholder="password"/>
-        <a class="btn btn-primary btn-block"
-           ng-click="model.login(model.user)">Login</a>
-        <a class="btn btn-success btn-block"
-           ng-click="model.register()">Register</a>
+        <form name="form1" novalidate>
+
+            <div class="form-group">
+            <input type="text" ng-model="model.user.username" class="form-control" placeholder="username" name="username" required/>
+            <div class="alert alert-danger" ng-show="form1.$submitted && form1.username.$error.required">Please Enter Username</div>
+            </div>
+
+            <div class="form-group">
+            <input type="password" ng-model="model.user.password" class="form-control" placeholder="password" name="password" required/>
+                <div class="alert alert-danger" ng-show="form1.$submitted && form1.password.$error.required">Please Enter Password</div>
+            </div>
+
+            <button type="submit" class="btn btn-primary btn-block"
+               ng-click="form1.$valid && model.login(model.user)">Login</button>
+            <a type="submit" name="fb" href="/auth/facebook" class="btn btn-primary btn-block">
+                <span class="fa fa-facebook"></span>
+                Facebook
+            </a>
+            <a type="submit" ng-click="model.register()" class="btn btn-success btn-block">
+                Register
+            </a>
+        </form>
     </div>

@@ -1,4 +1,4 @@
-
+<form name="form1" novalidate class="top-margin">
     <nav class="navbar navbar-default navbar-fixed-top">
         <div class="container-fluid">
 
@@ -15,7 +15,7 @@
                             Page Edit
                         </a>
                         <p class="navbar-text pull-right">
-                            <a ng-click="model.updatepage()" class="navbar-link">
+                            <a onclick="$('#submitBtn').click();" ng-click="form1.$valid && model.updatepage()" class="navbar-link">
                                         <span class="glyphicon glyphicon-ok white-color">
                                         </span>
                             </a>
@@ -31,7 +31,9 @@
     <form class="top-margin">
         <div class="form-group">
             <label>Name</label>
-            <input ng-model="model.page.name" class="form-control" placeholder="Page Name"/>
+            <input ng-model="model.page.name" class="form-control" placeholder="Page Name" name="name" required/>
+            <div class="alert alert-danger" ng-show="form1.$submitted && form1.name.$error.required">Please Enter Name</div>
+            <button type="submit" id="submitBtn" style="display:none;" data-validate="contact-form">Hidden Button</button>
         </div>
 
         <div class="form-group">
@@ -58,3 +60,4 @@
         </div>
         </div>
     </nav>
+</form>

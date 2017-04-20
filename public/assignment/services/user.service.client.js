@@ -18,9 +18,29 @@
             "findUserByUsername" : findUserByUsername,
             "findUserByCredentials" : findUserByCredentials,
             "updateUser" : updateUser,
-            "deleteUser" : deleteUser
+            "deleteUser" : deleteUser,
+            "login": login,
+            "logout": logout,
+            "updateUserFacebookId": updateUserFacebookId,
+            "createFBUser": createFBUser
         };
         return api;
+
+        function createFBUser() {
+            return $http.get ('/auth/facebook');
+        }
+
+        function updateUserFacebookId(user) {
+            return $http.put("/api/user/", user);
+        }
+        
+        function logout(user) {
+            return $http.post("/api/logout");
+        }
+        
+        function login(user) {
+            return $http.post("/api/login", user);
+        }
 
         function deleteUser(userId) {
             return $http.delete('/api/user/'+userId);

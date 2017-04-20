@@ -1,12 +1,45 @@
 module.exports = function (app, model) {
 
+    var passport      = require('passport');
+    var LocalStrategy = require('passport-local').Strategy;
+    var FacebookStrategy = require('passport-facebook').Strategy;
+
+    var bcrypt = require("bcrypt-nodejs");
+
+    var facebookConfig = {
+        clientID     : process.env.FACEBOOK_CLIENT_ID,
+        clientSecret : process.env.FACEBOOK_CLIENT_SECRET,
+        callbackURL  : process.env.FACEBOOK_CALLBACK_URL
+    };
+
+    passport.use(new LocalStrategy(localStrategy));
+    passport.use(new FacebookStrategy(facebookConfig, facebookStrategy));
+
+    passport.serializeUser(serializeUser);
+    passport.deserializeUser(deserializeUser);
+
+    app.get ('/auth/facebook', passport.authenticate('facebook', { scope : 'email' }));
+    app.post('/api/login', passport.authenticate('local'), login);
     app.get("/api/user", findUser);
     //app.get("/api/user?username=username&password=password", findUserByCredentials);
     app.get("/api/user/:userId", findUserByUserId);
     app.put("/api/user/:userId", updateUser);
+    app.put("/api/user/", updateUserFacebookId);
     app.delete("/api/user/:userId", deleteUser);
     app.post("/api/user", createUser);
     app.get("/api",allUsers);
+    app.post('/api/logout', logout);
+    app.get ('/api/loggedin', loggedin);
+
+    app.get('/auth/facebook/callback',
+        passport.authenticate('facebook', {
+            failureRedirect: '#/login'
+        }),
+        function(req,res) {
+            console.log("callback");
+            res.redirect("/assignment/index.html#/user/" + req.user._id);
+        }
+    );
 
     var users = [
         {_id: "123", username: "alice", password: "alice", firstName: "Alice", lastName: "Wonder"},
@@ -14,6 +47,96 @@ module.exports = function (app, model) {
         {_id: "345", username: "charly", password: "charly", firstName: "Charly", lastName: "Garcia"},
         {_id: "456", username: "jannunzi", password: "jannunzi", firstName: "Jose", lastName: "Annunzi"}
     ];
+
+    function facebookStrategy(token, refreshToken, profile, done) {
+
+        process.nextTick(function () {
+            model.UserModel
+                .findUserByFacebookId(profile.id)
+                .then(function (user) {
+                    //console.log(user);
+                    if(user ) {
+                        console.log(111);
+                        done(null, user);
+                    } else {
+                        //console.log(profile);
+                        var user = {
+                            username: profile.displayName,
+                            firstName: profile.name.givenName,
+                            lastName:  profile.name.familyName,
+                            //email:     profile.emails[0].value,
+                            facebook: {
+                                id:    profile.id,
+                                token: token
+                            }
+                        };
+                        return model.UserModel.createUser(user)
+                            .then(function (user) {
+                                done(null, user);
+                            }, function (err) {
+                                console.log(err);
+                                done(err, null);
+                            });
+                    }
+                }, function (err) {
+                    console.log(err);
+                    done(err, null);
+                });
+        });
+    }
+
+    function loggedin(req, res) {
+        res.send(req.isAuthenticated() ? req.user : '0');
+    }
+
+    function logout(req, res) {
+        req.logOut();
+        res.send(200);
+    }
+
+    function login(req, res) {
+        var user = req.user;
+        res.json(user);
+    }
+
+
+    function localStrategy(username, password, done) {
+        model.UserModel
+            .findUserByUsername(username)
+            .then(
+                function(user) {
+                    if(bcrypt.compareSync(password, user.password)) {
+                        console.log("password");
+                        return done(null, user);
+                    } else {
+                        console.log("error");
+                        return done(null, false);
+                    }
+                },
+                function(err) {
+                    if (err) { return done(err); }
+                }
+            );
+    }
+
+
+    function serializeUser(user, done) {
+        done(null, user);
+    }
+
+    function deserializeUser(user, done) {
+        model.UserModel
+            .findUserById(user._id)
+            .then(
+                function(user){
+                    done(null, user);
+                },
+                function(err){
+                    console.log(err);
+                    done(err, null);
+                }
+            );
+    }
 
     function allUsers(req,res) {
         res.json(users);
@@ -46,18 +169,47 @@ module.exports = function (app, model) {
         var newUser = req.body;
         //newUser._id = (new Date()).getTime() + "";
         //users.push(newUser);
+        console.log(newUser.password);
+        newUser.password = bcrypt.hashSync(newUser.password);
         model
             .UserModel
             .createUser(newUser)
             .then(
                 function (user) {
-                    res.send(user._id);
+                    if(user){
+                        req.login(user, function(err) {
+                            if(err) {
+                                res.status(400).send(err);
+                            } else {
+                                res.json(user);
+                            }
+                        });
+                    }
                 },
                 function (error) {
                     res.sendStatus(400).send(error);
                 }
             );
         //res.json(newUser._id);
+    }
+
+    function updateUserFacebookId(req, res) {
+        var newUser = req.body;
+        var userId = newUser._id;
+        var fb = {
+            id: userId
+        };
+        model
+            .UserModel
+            .updateUserFacebookId(userId,fb)
+            .then(
+                function (status) {
+                    res.sendStatus(200);
+                },
+                function (error) {
+                    res.sendStatus(400).send(error);
+                }
+            );
     }
 
     function updateUser(req, res) {

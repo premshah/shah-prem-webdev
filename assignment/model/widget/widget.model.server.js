@@ -64,6 +64,7 @@ module.exports = function () {
                       _id: widgetId
                   },
                   {
+                        name: widget.name,
                         size :widget.size,
                         text: widget.text
                   });

@@ -7,7 +7,7 @@ ul
 
 .container
 {
-    background-color: indianred;
+    background-color: cadetblue;
     width: 800px;
     height: 500px;
     margin-bottom: 5%;
@@ -46,7 +46,7 @@ ul
 .btn
 {
     background-color: white;
-    color: indianred;
+    color: cadetblue;
     border: none;
     margin-top: 5%;
 }

@@ -1,0 +1,56 @@
+<div class="row">
+
+    <div class="col-lg-4" style="height: 100%">
+        <video id="inputVideo" width="368" height="288" autoplay loop>
+            <!--<source src="./media/somevideo.ogv" type="video/ogg"/>-->
+        </video>
+        <canvas id="drawCanvas" width="368" height="288"></canvas>
+    </div>
+
+    <div class="col-lg-8" style="height: 100%">
+        <div class="input-field">
+            <div class="row row-letter">
+                <div class="col-lg-12">
+                    <textarea ng-model="model.sentence" class="form-control txt-area" rows="3"></textarea>
+                </div>
+            </div>
+        </div>
+        <div class="row row-letter">
+            <div class="col-lg-2" ng-repeat="char in model.suggestion">
+                <button class="btn btn-default" id="{{model.suggestion[$index]}}" ng-style="{'background-color': model.bgcolor}" ng-click="model.addChar(char)">{{char}}</button>
+            </div>
+        </div>
+        <div class="letters">
+            <div class="row row-letter">
+                <div class="col-lg-3" ng-repeat="char in model.row1">
+                    <button class="btn btn-default" id="{{model.row1[$index]}}" ng-style="{'background-color': model.bgcolor}" ng-click="model.addChar(char)">{{char}}</button>
+                </div>
+            </div>
+            <div class="row row-letter">
+                <div class="col-lg-3" ng-repeat="char in model.row2">
+                    <button class="btn btn-default" id="{{model.row2[$index]}}" ng-style="{'background-color': model.bgcolor}" ng-click="model.addChar(char)">{{char}}</button>
+                </div>
+            </div>
+            <div class="row row-letter">
+                <div class="col-lg-3" ng-repeat="char in model.row3">
+                    <button class="btn btn-default" id="{{model.row3[$index]}}" ng-style="{'background-color': model.bgcolor}" ng-click="model.addChar(char)">{{char}}</button>
+                </div>
+            </div>
+            <div class="row row-letter">
+                <div class="col-lg-3" ng-repeat="char in model.row4">
+                    <button class="btn btn-default" id="{{model.row4[$index]}}" ng-style="{'background-color': model.bgcolor}" ng-click="model.addChar(char)">{{char}}</button>
+                </div>
+            </div>
+            <div class="row row-letter">
+                <div class="col-lg-3" ng-repeat="char in model.row5">
+                    <button class="btn btn-default" id="{{model.row5[$index]}}" ng-style="{'background-color': model.bgcolor}" ng-click="model.addChar(char)">{{char}}</button>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-lg-2" ng-repeat="char in model.row6">
+                    <button class="btn btn-default" id="{{model.row6[$index]}}" ng-style="{'background-color': model.bgcolor}" ng-click="model.addChar(char)">{{char}}</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

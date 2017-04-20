@@ -1,0 +1,9 @@
+your score is {{model.count}} out of {{model.datas.length}}
+
+<br/>
+<br/>
+<div ng-repeat="d in model.datas">
+    ({{$index+1}})Question: {{d.question}}<br/>
+    Correct Answer: {{d.correct_ans}}<br/>
+    User's Answer: {{d.user_ans}}<br/><br/>
+</div>

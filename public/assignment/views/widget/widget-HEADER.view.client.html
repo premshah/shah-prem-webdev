@@ -3,7 +3,9 @@
     <form class="top-margin">
         <div class="form-group">
             <label>Name</label>
-            <input ng-model="model.widget.name" class="form-control"/>
+            <input ng-model="model.widget.name" class="form-control" name="name" required/>
+            <div class="alert alert-danger" ng-show="form1.$submitted && form1.name.$error.required">Please Enter Name</div>
+            <button type="submit" id="submitBtn" style="display:none;" data-validate="contact-form">Hidden Button</button>
         </div>
 
         <div class="form-group">

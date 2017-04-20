@@ -1,4 +1,4 @@
-
+<form name="form1" novalidate>
     <nav class="navbar navbar-primary navbar-fixed-top">
         <div class="container-fluid">
 
@@ -49,7 +49,7 @@
                                     New Website
                                 </a>
                                 <p class="navbar-text pull-right">
-                                    <a ng-click="model.addwebsite()" class="navbar-link">
+                                    <a onclick="$('#submitBtn').click();" ng-click="form1.$valid && model.addwebsite()" class="navbar-link">
                                 <span class="glyphicon glyphicon-ok white-color">
                                 </span>
                                     </a>
@@ -125,7 +125,9 @@
             <form>
                 <div class="form-group">
                     <label>Name</label>
-                    <input ng-model="model.website.name" class="form-control" placeholder="Name"/>
+                    <input ng-model="model.website.name" name="name" class="form-control" placeholder="Name" required/>
+                    <div class="alert alert-danger" ng-show="form1.$submitted && form1.name.$error.required">Please Enter Name</div>
+                    <button type="submit" id="submitBtn" style="display:none;" data-validate="contact-form">Hidden Button</button>
                 </div>
 
                 <div class="form-group">
@@ -152,3 +154,4 @@
         </div>
     </nav>
 
+</form>
